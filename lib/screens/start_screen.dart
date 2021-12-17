@@ -12,9 +12,11 @@ class StartScreen extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('images/world/startScreenBackground.png'))),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/images/world/startScreenBackground.png'),
+            ),
+          ),
           // This Text widget uses the RobotoMono font.
           child: Flex(
             direction: Axis.horizontal,
@@ -25,7 +27,7 @@ class StartScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const PlayGame(),
+                      builder: (context) => const GameScreen(),
                     ),
                   );
                 },

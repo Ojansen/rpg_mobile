@@ -1,20 +1,51 @@
+import 'package:arpg/models/player_model.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'screens/start_screen.dart';
 
-void main() => runApp(const App());
+void main() {
+  Flame.device.setPortrait();
+  Flame.device.fullScreen();
+  runApp(
+    FutureProvider<PlayerModel>(
+      create: (BuildContext context) => getPlayerData(),
+      initialData: PlayerModel.fromMap(PlayerModel.defaultPlayer),
+      builder: (context, child) {
+        return ChangeNotifierProvider.value(
+            value: Provider.of<PlayerModel>(context),
+            child: child
+        );
+      },
+      child: MaterialApp(
+        theme: ThemeData(
+            textTheme: const TextTheme(
+              bodyText2: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+            fontFamily: 'MajorMono'),
+        home: const StartScreen(),
+      ),
+    ),
+  );
+}
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+Future<void> initHive() async {
+  final dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          textTheme: const TextTheme(
-            bodyText2: TextStyle(fontSize: 24, color: Colors.white),
-          ),
-          fontFamily: 'MajorMono'),
-      home: const StartScreen(),
-    );
+  Hive.registerAdapter(PlayerModelAdapter());
+}
+
+Future<PlayerModel> getPlayerData() async {
+  await initHive();
+
+  final box = await Hive.openBox<PlayerModel>('PlayerModelBox');
+  final playerModel = box.get('PlayerData');
+  if (playerModel == null) {
+    box.put('PlayerData', PlayerModel.fromMap(PlayerModel.defaultPlayer));
   }
+
+  return box.get('PlayerData')!;
 }
