@@ -1,11 +1,20 @@
+
 class Item {
   final int id;
   final String name;
   final String description;
   final String rarity;
   final int isUnique;
-  final int cost;
-  final String spriteName;
+  final int price;
+  final String spritePath;
 
-  Item(this.id, this.name, this.description, this.rarity, this.isUnique, this.cost, this.spriteName);
+  const Item({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.rarity,
+    required this.isUnique,
+    required this.price,
+    required this.spritePath,
+  });
 }

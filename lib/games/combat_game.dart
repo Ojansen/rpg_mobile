@@ -16,7 +16,6 @@ class CombatGame extends FlameGame with HasCollidables, HasDraggables {
     add(enemyController);
     final player = Player(
       joystick: joystick,
-      sprite: await loadSprite('sprites/FinnSprite.png'),
       size: Vector2.all(150.0),
       position: Vector2(100, 500),
     );

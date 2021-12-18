@@ -1,16 +1,17 @@
 
-import 'package:arpg/models/player_model.dart';
+import 'package:arpg/overlay/combat_overlay.dart';
 import 'package:arpg/sprites/enemy_sprite.dart';
+import 'package:arpg/world/earth.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
-import 'package:hive/hive.dart';
 
 class Player extends SpriteComponent with HasGameRef, HasHitboxes, Collidable {
   /// Pixels/s
-  double maxSpeed = 500.0;
+  double maxSpeed = 200.0;
   Vector2 lastPos = Vector2.zero();
   final JoystickComponent joystick;
-  // PlayerModel _playerModel;
+  // late PlayerModel _playerModel;
+  final Earth _world = Earth();
 
   Player({
     required this.joystick,
@@ -20,33 +21,27 @@ class Player extends SpriteComponent with HasGameRef, HasHitboxes, Collidable {
   }) : super(sprite: sprite, position: position, size: size) {
     collidableType = CollidableType.active;
     addHitbox(HitboxCircle());
+    // size = Vector2.all(150.0);
 
     anchor = Anchor.center;
     debugMode = true;
   }
 
-  Future<void> getPlayerModelBox() async {
-    var box = Hive.box<PlayerModel>('PlayerModelBox');
-    print(box.values);
-  }
-
-  @override
-  void onMount() {
-    // TODO: implement onMount
-    super.onMount();
-
-    // _playerModel = Provider.of(gameRef.buildContext!, listen: false);
-  }
-
   @override
   Future<void> onLoad() async {
+    // sprite: sprite;
+    sprite = await gameRef.loadSprite('sprites/FinnSprite.png');
     super.onLoad();
-    sprite = sprite;
-    position = gameRef.size / 2;
+    // add(SpriteComponent(
+    //   sprite: await gameRef.loadSprite('sprites/FinnSprite.png'),
+    //   // position: position,
+    //   size: size,
+    //   // anchor: anchor,
+    // ));
+    // position = _world.size / 2;
+    // gameRef.camera.followComponent(this, worldBounds: Rect.fromLTRB(0, 0, _world.size.x, _world.size.y));
     // add(TextComponent());
-    getPlayerModelBox();
     // print(_playerModel.save());
-
   }
 
   @override
@@ -66,9 +61,9 @@ class Player extends SpriteComponent with HasGameRef, HasHitboxes, Collidable {
       position = lastPos;
     } else if (other is Enemy) {
       position = lastPos;
-      gameRef.overlays.add('CombatOverlay');
       gameRef.pauseEngine();
       // gameRef.pauseEngine();
+      gameRef.overlays.add(CombatMenu.id);
     }
   }
 }

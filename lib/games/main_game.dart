@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:arpg/controllers/enemy_controller.dart';
 import 'package:arpg/sprites/player_sprite.dart';
+import 'package:arpg/world/earth.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:arpg/services/constants.dart';
@@ -15,23 +18,41 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     // final TiledComponent tiledMap = TiledComponent(map);
     // add(tiledMap);
 
-    SpriteComponent background = SpriteComponent()
-      ..sprite = await loadSprite('world/startScreenBackground.png')
-      ..size = size;
-    add(background);
+    SpriteComponent map = SpriteComponent()
+      ..sprite = await loadSprite('world/maps/Earth.png')
+      ..size = Vector2(3200, 3200);
+    add(map);
+
+    // final Earth _world1 = Earth();
+    // add(_world1);
 
     final player = Player(
       joystick: joystick,
-      sprite: await loadSprite('sprites/FinnSprite.png'),
-      size: Vector2.all(150.0),
-      position: Vector2(100, 500),
+      size: Vector2(100, 100),
+      position: map.size / 2,
     );
-
-    // camera.follow = player.position / 2;
 
     add(ScreenCollidable());
     add(enemyController);
+
     add(player);
     add(joystick);
+    // camera.follow = player.center;
+    camera.followComponent(player);
+    // camera.position = player.position / 2;
+    // camera.followComponent(player);
+    camera.worldBounds = Rect.fromLTRB(0, 0, map.size.x, map.size.y);
+    // camera.snapTo(player.position);
+    // camera.moveTo(parent1.position);
+    camera.speed = 10;
+    // camera.screenToWorld(Vector2(1920, 1080));
+    camera.worldToScreen(map.size);
+  }
+
+  @override
+  void update(double dt) {
+    // TODO: implement update
+    super.update(dt);
+    // camera.update(dt);
   }
 }

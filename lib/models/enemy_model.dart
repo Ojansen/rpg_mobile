@@ -1,16 +1,18 @@
-import 'package:flutter/cupertino.dart';
 
-class EnemyModel extends ChangeNotifier {
-  int id;
-  String type;
-  String name;
-  int level;
-  double health;
-  double attack;
-  double attackSpeed;
-  double defence;
+class EnemyModel {
+  final int id;
+  final String type;
+  final String name;
+  final int level;
+  final double health;
+  final double attack;
+  final double attackSpeed;
+  final double defence;
+  final double money;
+  final int equippedArmour;
+  final int equippedWeapon;
 
-  EnemyModel({
+  const EnemyModel({
     required this.id,
     required this.type,
     required this.name,
@@ -19,26 +21,8 @@ class EnemyModel extends ChangeNotifier {
     required this.attack,
     required this.attackSpeed,
     required this.defence,
+    required this.money,
+    required this.equippedArmour,
+    required this.equippedWeapon,
   });
-
-  EnemyModel.fromMap(Map<String, dynamic> map):
-        id = map['id'],
-        type = map['type'],
-        name = map['name'],
-        level = map['level'],
-        health = map['health'],
-        attack = map['attack'],
-        attackSpeed = map['attackSpeed'],
-        defence = map['defence'];
-
-  static Map<String, dynamic> defaultEnemy = {
-    'id': 1,
-    'type': 'enemy',
-    'name': 'Finn',
-    'level': 2,
-    'health': 100,
-    'attack': 1,
-    'attackSpeed': 0.5,
-    'defence': 10
-  };
 }

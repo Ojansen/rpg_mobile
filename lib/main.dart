@@ -6,15 +6,17 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'screens/start_screen.dart';
 
-void main() {
-  Flame.device.setPortrait();
-  Flame.device.fullScreen();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initHive();
+  await Flame.device.setPortrait();
+  await Flame.device.fullScreen();
   runApp(
     FutureProvider<PlayerModel>(
       create: (BuildContext context) => getPlayerData(),
       initialData: PlayerModel.fromMap(PlayerModel.defaultPlayer),
       builder: (context, child) {
-        return ChangeNotifierProvider.value(
+        return ChangeNotifierProvider<PlayerModel>.value(
             value: Provider.of<PlayerModel>(context),
             child: child
         );
