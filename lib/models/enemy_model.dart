@@ -1,4 +1,3 @@
-
 class EnemyModel {
   final int id;
   final String type;
@@ -25,4 +24,40 @@ class EnemyModel {
     required this.equippedArmour,
     required this.equippedWeapon,
   });
+
+  static const Map<EnemyNames, EnemyModel> wetEnemies = {
+    EnemyNames.human: EnemyModel(
+        id: 0,
+        type: 'human',
+        name: 'Human',
+        level: 1,
+        health: 100,
+        attack: 10,
+        attackSpeed: 1,
+        defence: 100,
+        money: 100,
+        equippedArmour: 0,
+        equippedWeapon: 0),
+
+    EnemyNames.exoHuman: EnemyModel(
+        id: 0,
+        type: 'exo human',
+        name: 'Exo human',
+        level: 1,
+        health: 200,
+        attack: 10,
+        attackSpeed: 1,
+        defence: 200,
+        money: 200,
+        equippedArmour: 0,
+        equippedWeapon: 0),
+  };
+}
+
+enum EnemyNames {
+  human,
+  exoHuman,
+  android,
+  robot,
+  computer,
 }

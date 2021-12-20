@@ -1,15 +1,15 @@
-import 'package:arpg/components/button/pause_button.dart';
+import 'package:arpg/components/pause_button.dart';
 import 'package:arpg/games/main_game.dart';
 import 'package:arpg/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 
 
 // This class represents the pause menu overlay.
-class PauseMenu extends StatelessWidget {
-  static const String id = 'PauseMenu';
+class PauseOverlay extends StatelessWidget {
+  static const String id = 'PauseOverlay';
   final MainGame gameRef;
 
-  const PauseMenu({Key? key, required this.gameRef}) : super(key: key);
+  const PauseOverlay({Key? key, required this.gameRef}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class PauseMenu extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 3,
             child: ElevatedButton(
               onPressed: () {
-                gameRef.overlays.remove(PauseMenu.id);
+                gameRef.overlays.remove(PauseOverlay.id);
                 gameRef.resumeEngine();
               },
               child: const Text('Resume'),
@@ -53,7 +53,7 @@ class PauseMenu extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 3,
             child: ElevatedButton(
               onPressed: () {
-                gameRef.overlays.remove(PauseMenu.id);
+                gameRef.overlays.remove(PauseOverlay.id);
                 gameRef.resumeEngine();
               },
               child: const Text('Restart'),
@@ -65,7 +65,7 @@ class PauseMenu extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 3,
             child: ElevatedButton(
               onPressed: () {
-                gameRef.overlays.remove(PauseMenu.id);
+                gameRef.overlays.remove(PauseOverlay.id);
                 gameRef.reset();
 
                 Navigator.of(context).pushReplacement(

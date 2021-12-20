@@ -4,11 +4,15 @@ import 'dart:ui';
 import 'package:arpg/controllers/enemy_controller.dart';
 import 'package:arpg/sprites/enemy_sprite.dart';
 import 'package:arpg/sprites/player_sprite.dart';
+import 'package:arpg/sprites/teleport_sprite.dart';
 import 'package:arpg/sprites/vendor_sprite.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:arpg/services/constants.dart';
+import 'package:flame/sprite.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
+import 'package:tiled/tiled.dart';
 
 class MainGame extends FlameGame with HasDraggables, HasCollidables {
 
@@ -27,16 +31,17 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     resumeEngine();
     EnemyController enemyController = EnemyController();
 
-    // final spacehipSpritebatch = SpriteBatch().fromMap(Map<String, dynamic> map)
+    // final spacehipSpritebatch = SpriteBatch(atlas);
     // final TiledComponent map = TiledComponent(
     //   RenderableTiledMap(
     //     TiledMap(type: TileMapType.map, width: 1920, height: 1920, tileWidth: 64, tileHeight: 64),
-    //     {},
+    //     spacehipSpritebatch,
     //     Vector2(1920, 1920),
     //   ),
-    // 'Spaceship.tmx',
-    // Vector2(64.0, 64.0),
     // );
+
+    final tiledMap = await TiledComponent.load('Spaceship.tmx', Vector2.all(64));
+    add(tiledMap);
 
     // final map = TiledMap(width: 1920, height: 1920, tileWidth: 64, tileHeight: 64);
     // add(map);
@@ -44,13 +49,18 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     // final TiledComponent tiledMap = TiledComponent(map);
     // add(tiledMap);
 
-    SpriteComponent mapSprite = SpriteComponent()
-      ..sprite = await loadSprite('spaceships/Spaceship.png')
-      ..size = Vector2(1920, 1920);
-    add(mapSprite);
+    // SpriteComponent mapSprite = SpriteComponent()
+    //   ..sprite = await loadSprite('spaceships/Spaceship.png')
+    //   ..size = Vector2(1920, 1920);
+    // add(mapSprite);
 
     // final Earth _world1 = Earth();
     // add(_world1);
+
+    TeleportSprite teleporter = TeleportSprite(
+      sprite: await loadSprite('sprites/teleport.png'),
+    );
+    add(teleporter);
 
     _player = Player(
       joystick: kjoystick,

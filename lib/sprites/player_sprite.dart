@@ -1,6 +1,8 @@
 import 'package:arpg/overlay/combat_overlay.dart';
+import 'package:arpg/overlay/level_overlay.dart';
 import 'package:arpg/overlay/vendor_overlay.dart';
 import 'package:arpg/sprites/enemy_sprite.dart';
+import 'package:arpg/sprites/teleport_sprite.dart';
 import 'package:arpg/sprites/vendor_sprite.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
@@ -89,12 +91,16 @@ class Player extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Coll
     if (other is Enemy) {
       position = lastPos;
       gameRef.pauseEngine();
-      gameRef.overlays.add(CombatMenu.id);
+      gameRef.overlays.add(CombatOverlay.id);
     }
     if (other is Vendor) {
       position = lastPos;
       gameRef.pauseEngine();
-      gameRef.overlays.add(VendorMenu.id);
+      gameRef.overlays.add(VendorOverlay.id);
+    }
+    if (other is TeleportSprite) {
+      position = lastPos;
+      gameRef.overlays.add(LevelOverlay.id);
     }
   }
 

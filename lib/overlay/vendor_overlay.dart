@@ -3,11 +3,11 @@ import 'package:arpg/models/player_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class VendorMenu extends StatelessWidget {
-  static const String id = 'VendorMenu';
+class VendorOverlay extends StatelessWidget {
+  static const String id = 'VendorOverlay';
   final MainGame gameRef;
 
-  const VendorMenu({Key? key, required this.gameRef}) : super(key: key);
+  const VendorOverlay({Key? key, required this.gameRef}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class VendorMenu extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 3,
                 child: ElevatedButton(
                   onPressed: () {
-                    gameRef.overlays.remove(VendorMenu.id);
+                    gameRef.overlays.remove(VendorOverlay.id);
                     gameRef.resumeEngine();
                   },
                   child: const Text('Resume'),

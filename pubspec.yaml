@@ -30,8 +30,14 @@ dependencies:
   flutter:
     sdk: flutter
   flame: 1.0.0
+
   tiled: 0.7.2
-#  flame_tiled: 1.0.0
+  flame_tiled: 1.0.0
+  meta: ^1.7.0
+
+  xml: ^5.3.1
+#  petitparser: ^4.4.0
+
   provider: ^6.0.1
   hive: ^2.0.5
   hive_flutter: ^1.1.0

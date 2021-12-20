@@ -50,7 +50,7 @@ class HudOverlay extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      gameRef.overlays.add(PauseMenu.id);
+                      gameRef.overlays.add(PauseOverlay.id);
                       gameRef.pauseEngine();
                     },
                   ),

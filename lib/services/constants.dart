@@ -16,6 +16,6 @@ final kjoystick = JoystickComponent(
 const kHudTextStyle = TextStyle(
   decoration: TextDecoration.none,
   color: Colors.white,
-  fontSize: 24,
+  fontSize: 16,
   fontFamily: 'MajorMono',
 );

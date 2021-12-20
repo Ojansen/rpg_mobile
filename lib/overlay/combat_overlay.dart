@@ -3,11 +3,11 @@ import 'package:arpg/models/player_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CombatMenu extends StatelessWidget {
-  static const String id = 'CombatMenu';
+class CombatOverlay extends StatelessWidget {
+  static const String id = 'CombatOverlay';
   final MainGame gameRef;
 
-  const CombatMenu({Key? key, required this.gameRef}) : super(key: key);
+  const CombatOverlay({Key? key, required this.gameRef}) : super(key: key);
   //
   // Future<PlayerModel> getPlayerData() async {
   //   await initHive();
@@ -36,7 +36,7 @@ class CombatMenu extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     gameRef.resumeEngine();
-                    gameRef.overlays.remove(CombatMenu.id);
+                    gameRef.overlays.remove(CombatOverlay.id);
                   },
                   child: const Text('Resume'),
                 ),

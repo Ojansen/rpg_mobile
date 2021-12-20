@@ -1,8 +1,9 @@
-import 'package:arpg/components/button/pause_button.dart';
+import 'package:arpg/components/pause_button.dart';
 import 'package:arpg/games/main_game.dart';
 import 'package:arpg/overlay/combat_overlay.dart';
 import 'package:arpg/overlay/hub_overlay.dart';
 import 'package:arpg/overlay/hub_overlay.dart';
+import 'package:arpg/overlay/level_overlay.dart';
 import 'package:arpg/overlay/pause_overlay.dart';
 import 'package:arpg/overlay/vendor_overlay.dart';
 import 'package:flame/game.dart';
@@ -21,18 +22,21 @@ class GameScreen extends StatelessWidget {
         HudOverlay.id,
       ],
       overlayBuilderMap: {
-        CombatMenu.id: (BuildContext context, MainGame gameRef) => CombatMenu(
+        CombatOverlay.id: (BuildContext context, MainGame gameRef) => CombatOverlay(
               gameRef: gameRef,
             ),
-        PauseMenu.id: (BuildContext context, MainGame gameRef) => PauseMenu(
+        PauseOverlay.id: (BuildContext context, MainGame gameRef) => PauseOverlay(
               gameRef: gameRef,
             ),
-        VendorMenu.id: (BuildContext context, MainGame gameRef) => VendorMenu(
+        VendorOverlay.id: (BuildContext context, MainGame gameRef) => VendorOverlay(
               gameRef: gameRef,
             ),
         HudOverlay.id: (BuildContext context, MainGame gameRef) => HudOverlay(
               gameRef: gameRef,
             ),
+        LevelOverlay.id: (BuildContext context, MainGame gameRef) => LevelOverlay(
+          gameRef: gameRef,
+        ),
       },
     );
   }
