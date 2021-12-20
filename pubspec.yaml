@@ -31,7 +31,7 @@ dependencies:
     sdk: flutter
   flame: 1.0.0
   tiled: 0.7.2
-  flame_tiled: 1.0.0
+#  flame_tiled: 1.0.0
   provider: ^6.0.1
   hive: ^2.0.5
   hive_flutter: ^1.1.0
@@ -74,9 +74,11 @@ flutter:
 
   assets:
     - assets/audio/
+    - assets/tiles/
     - assets/images/
     - assets/images/items/
     - assets/images/sprites/
+    - assets/images/spaceships/
     - assets/images/world/
     - assets/images/world/maps/
 

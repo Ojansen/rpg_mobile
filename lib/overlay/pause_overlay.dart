@@ -41,9 +41,8 @@ class PauseMenu extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 3,
             child: ElevatedButton(
               onPressed: () {
-                gameRef.resumeEngine();
                 gameRef.overlays.remove(PauseMenu.id);
-                gameRef.overlays.add(PauseButton.id);
+                gameRef.resumeEngine();
               },
               child: const Text('Resume'),
             ),
@@ -55,8 +54,6 @@ class PauseMenu extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(PauseMenu.id);
-                gameRef.overlays.add(PauseButton.id);
-                // gameRef.reset();
                 gameRef.resumeEngine();
               },
               child: const Text('Restart'),
@@ -69,7 +66,7 @@ class PauseMenu extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(PauseMenu.id);
-                // gameRef.reset();
+                gameRef.reset();
 
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(

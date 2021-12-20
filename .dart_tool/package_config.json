@@ -182,12 +182,6 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "flame_tiled",
-      "rootUri": "file:///C:/Users/obeja/Documents/Flutter/flutter%20sdk/.pub-cache/hosted/pub.dartlang.org/flame_tiled-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
       "name": "flutter",
       "rootUri": "file:///C:/Users/obeja/Documents/Flutter/flutter%20sdk/packages/flutter",
       "packageUri": "lib/",
@@ -554,7 +548,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2021-12-18T14:35:12.334831Z",
+  "generated": "2021-12-19T19:57:08.572433Z",
   "generator": "pub",
   "generatorVersion": "2.15.0"
 }

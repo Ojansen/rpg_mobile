@@ -1,52 +1,86 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:arpg/controllers/enemy_controller.dart';
+import 'package:arpg/sprites/enemy_sprite.dart';
 import 'package:arpg/sprites/player_sprite.dart';
-import 'package:arpg/world/earth.dart';
+import 'package:arpg/sprites/vendor_sprite.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:arpg/services/constants.dart';
+import 'package:flutter/material.dart';
 
 class MainGame extends FlameGame with HasDraggables, HasCollidables {
+
+  get random => Random();
+
+  static const double mapSizeX = 1920;
+  static const double mapSizeY = 1920;
+
+  late final ComponentSet components = createComponentSet();
+
+  late Player _player;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
+    resumeEngine();
     EnemyController enemyController = EnemyController();
-    // final map = RenderableTiledMap(TiledMap(tileWidth: 1, width: 16, height: 16, tileHeight: 1), Map(), Vector2(16.0,16.0));
+
+    // final spacehipSpritebatch = SpriteBatch().fromMap(Map<String, dynamic> map)
+    // final TiledComponent map = TiledComponent(
+    //   RenderableTiledMap(
+    //     TiledMap(type: TileMapType.map, width: 1920, height: 1920, tileWidth: 64, tileHeight: 64),
+    //     {},
+    //     Vector2(1920, 1920),
+    //   ),
+    // 'Spaceship.tmx',
+    // Vector2(64.0, 64.0),
+    // );
+
+    // final map = TiledMap(width: 1920, height: 1920, tileWidth: 64, tileHeight: 64);
+    // add(map);
+    // print(map.tileMap.batches);
     // final TiledComponent tiledMap = TiledComponent(map);
     // add(tiledMap);
 
-    SpriteComponent map = SpriteComponent()
-      ..sprite = await loadSprite('world/maps/Earth.png')
-      ..size = Vector2(3200, 3200);
-    add(map);
+    SpriteComponent mapSprite = SpriteComponent()
+      ..sprite = await loadSprite('spaceships/Spaceship.png')
+      ..size = Vector2(1920, 1920);
+    add(mapSprite);
 
     // final Earth _world1 = Earth();
     // add(_world1);
 
-    final player = Player(
-      joystick: joystick,
-      size: Vector2(100, 100),
-      position: map.size / 2,
+    _player = Player(
+      joystick: kjoystick,
+      size: Vector2(64, 64),
+      position: Vector2(1920, 1920) / 2,
     );
+
+    // final vendor = Vendor();
+    add(Vendor());
 
     add(ScreenCollidable());
     add(enemyController);
 
-    add(player);
-    add(joystick);
+    add(_player);
+    add(kjoystick);
+
     // camera.follow = player.center;
-    camera.followComponent(player);
+    camera.followComponent(_player);
     // camera.position = player.position / 2;
     // camera.followComponent(player);
-    camera.worldBounds = Rect.fromLTRB(0, 0, map.size.x, map.size.y);
+    camera.worldBounds = const Rect.fromLTRB(0, 0, mapSizeX, mapSizeY);
     // camera.snapTo(player.position);
     // camera.moveTo(parent1.position);
-    camera.speed = 10;
-    // camera.screenToWorld(Vector2(1920, 1080));
-    camera.worldToScreen(map.size);
+    camera.speed = 50;
+
+    // camera.zoom = 0.5; // bugged in v1.0.0
+
+    // camera.screenToWorld(Vector2(1920, 1920));
+    // camera.worldToScreen(Vector2(1920, 1920));
+
   }
 
   @override
@@ -54,5 +88,21 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     // TODO: implement update
     super.update(dt);
     // camera.update(dt);
+  }
+
+  void reset() {
+    // First reset player, enemy manager and power-up manager .
+    _player.reset();
+    // remove(_player);
+    // remove(kjoystick);
+
+    // Now remove all the enemies, bullets and power ups
+    // from the game world. Note that, we are not calling
+    // Enemy.destroy() because it will unnecessarily
+    // run explosion effect and increase players score.
+    components.whereType<Enemy>().forEach((enemy) {
+      remove(enemy);
+    });
+    detach();
   }
 }

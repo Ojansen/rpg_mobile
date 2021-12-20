@@ -18,9 +18,8 @@ class PauseButton extends StatelessWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          gameRef.pauseEngine();
           gameRef.overlays.add(PauseMenu.id);
-          gameRef.overlays.remove(PauseButton.id);
+          gameRef.pauseEngine();
         },
       ),
     );

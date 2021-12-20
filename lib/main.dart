@@ -8,9 +8,10 @@ import 'screens/start_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initHive();
   await Flame.device.setPortrait();
   await Flame.device.fullScreen();
+
+  await initHive();
   runApp(
     FutureProvider<PlayerModel>(
       create: (BuildContext context) => getPlayerData(),

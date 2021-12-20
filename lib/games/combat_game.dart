@@ -15,7 +15,7 @@ class CombatGame extends FlameGame with HasCollidables, HasDraggables {
     EnemyController enemyController = EnemyController();
     add(enemyController);
     final player = Player(
-      joystick: joystick,
+      joystick: kjoystick,
       size: Vector2.all(150.0),
       position: Vector2(100, 500),
     );
@@ -25,6 +25,6 @@ class CombatGame extends FlameGame with HasCollidables, HasDraggables {
     add(ScreenCollidable());
     add(enemyController);
     add(player);
-    add(joystick);
+    add(kjoystick);
   }
 }

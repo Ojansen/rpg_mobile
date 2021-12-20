@@ -24,8 +24,7 @@ class StartScreen extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const GameScreen(),
                     ),
@@ -33,7 +32,6 @@ class StartScreen extends StatelessWidget {
                 },
                 child: const Text('Start'),
               ),
-              const Text('Start')
             ],
           ),
         ),
