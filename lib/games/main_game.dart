@@ -2,10 +2,12 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:arpg/controllers/enemy_controller.dart';
+import 'package:arpg/controllers/level_controller.dart';
 import 'package:arpg/sprites/enemy_sprite.dart';
 import 'package:arpg/sprites/player_sprite.dart';
 import 'package:arpg/sprites/teleport_sprite.dart';
 import 'package:arpg/sprites/vendor_sprite.dart';
+import 'package:arpg/world/level_map.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:arpg/services/constants.dart';
@@ -23,13 +25,33 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
 
   late final ComponentSet components = createComponentSet();
 
-  late Player _player;
+  late final PlayerSprite _player = PlayerSprite(
+    joystick: kjoystick,
+    size: Vector2(16, 16),
+    position: Vector2(1920, 1920) / 2,
+  );
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
     resumeEngine();
-    EnemyController enemyController = EnemyController();
+
+    LevelController levelController = LevelController();
+    add(LevelMap().hubLevel);
+    // final hublevel = await levelController.loadHub('hub');
+    // for (var element in hublevel) {
+    //   add(element);
+    //   print(element);
+    //   if (element is PlayerSprite) {
+    //     camera.followComponent(element);
+    //   }
+    // }
+    // add(hublevel);
+
+    // camera.followComponent(hubmap.player);
+    // camera.worldBounds = Rect.fromLTRB(0, 0, mapSizeX, mapSizeY);
+
+    // EnemyController enemyController = EnemyController();
 
     // final spacehipSpritebatch = SpriteBatch(atlas);
     // final TiledComponent map = TiledComponent(
@@ -40,8 +62,8 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     //   ),
     // );
 
-    final tiledMap = await TiledComponent.load('Spaceship.tmx', Vector2.all(64));
-    add(tiledMap);
+    // final tiledMap = await TiledComponent.load('Spaceship.tmx', Vector2.all(64));
+    // add(tiledMap);
 
     // final map = TiledMap(width: 1920, height: 1920, tileWidth: 64, tileHeight: 64);
     // add(map);
@@ -57,36 +79,28 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     // final Earth _world1 = Earth();
     // add(_world1);
 
-    TeleportSprite teleporter = TeleportSprite(
-      sprite: await loadSprite('sprites/teleport.png'),
-    );
-    add(teleporter);
-
-    _player = Player(
-      joystick: kjoystick,
-      size: Vector2(64, 64),
-      position: Vector2(1920, 1920) / 2,
-    );
+    // TeleportSprite teleporter = TeleportSprite(
+    //   sprite: await loadSprite('sprites/teleport.png'),
+    // );
+    // add(teleporter);
 
     // final vendor = Vendor();
-    add(Vendor());
+    // add(Vendor());
 
-    add(ScreenCollidable());
-    add(enemyController);
+    // add(enemyController);
 
-    add(_player);
-    add(kjoystick);
+    // add(_player);
+    // add(kjoystick);
 
     // camera.follow = player.center;
-    camera.followComponent(_player);
     // camera.position = player.position / 2;
     // camera.followComponent(player);
-    camera.worldBounds = const Rect.fromLTRB(0, 0, mapSizeX, mapSizeY);
+
     // camera.snapTo(player.position);
     // camera.moveTo(parent1.position);
-    camera.speed = 50;
+    // camera.speed = 50;
 
-    // camera.zoom = 0.5; // bugged in v1.0.0
+    // camera.zoom = 1.5; // bugged in v1.0.0
 
     // camera.screenToWorld(Vector2(1920, 1920));
     // camera.worldToScreen(Vector2(1920, 1920));
@@ -96,13 +110,13 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
   @override
   void update(double dt) {
     // TODO: implement update
-    super.update(dt);
+    // super.update(dt);
     // camera.update(dt);
   }
 
   void reset() {
     // First reset player, enemy manager and power-up manager .
-    _player.reset();
+    // _player.reset();
     // remove(_player);
     // remove(kjoystick);
 
@@ -110,9 +124,9 @@ class MainGame extends FlameGame with HasDraggables, HasCollidables {
     // from the game world. Note that, we are not calling
     // Enemy.destroy() because it will unnecessarily
     // run explosion effect and increase players score.
-    components.whereType<Enemy>().forEach((enemy) {
-      remove(enemy);
-    });
-    detach();
+    // components.whereType<EnemySprite>().forEach((enemy) {
+    //   remove(enemy);
+    // });
+    // detach();
   }
 }

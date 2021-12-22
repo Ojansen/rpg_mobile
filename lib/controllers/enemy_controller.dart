@@ -9,7 +9,7 @@ class EnemyController extends Component with HasGameRef {
   Random random = Random();
 
   void _spawnEnemy() async {
-    Enemy enemy = Enemy(
+    EnemySprite enemy = EnemySprite(
       sprite: await gameRef.loadSprite('sprites/enemy1.png'),
       size: Vector2(100, 100),
       position: Vector2(random.nextDouble() * gameRef.size.x, 0),
@@ -25,7 +25,7 @@ class EnemyController extends Component with HasGameRef {
   }
 
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
-    if (other is Player) {
+    if (other is PlayerSprite) {
       removeFromParent();
     }
   }

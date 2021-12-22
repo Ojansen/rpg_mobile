@@ -1,9 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 
-class Enemy extends SpriteComponent with HasGameRef, HasHitboxes, Collidable {
+class EnemySprite extends SpriteComponent with HasGameRef, HasHitboxes, Collidable {
 
-  Enemy({
+  EnemySprite({
     Sprite? sprite,
     Vector2? position,
     Vector2? size,

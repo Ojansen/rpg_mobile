@@ -8,10 +8,11 @@ import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
 
-class Player extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Collidable {
+class PlayerSprite extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Collidable {
   /// Pixels/s
   double maxSpeed = 500.0;
   Vector2 lastPos = Vector2.zero();
+  Vector2 spriteSize = Vector2(16, 16);
   final JoystickComponent joystick;
 
   late final SpriteAnimation _runDownAnimation;
@@ -23,7 +24,7 @@ class Player extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Coll
   // late PlayerModel _playerModel;
   // final Earth _world = Earth();
 
-  Player({
+  PlayerSprite({
     required this.joystick,
     Vector2? size,
     Vector2? position,
@@ -41,7 +42,7 @@ class Player extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Coll
 
     final spriteSheet = SpriteSheet(
       image: await gameRef.images.load('sprites/BlackKnight.png'),
-      srcSize: Vector2(16, 16),
+      srcSize: spriteSize,
     );
 
     _runDownAnimation = spriteSheet.createAnimation(row: 0, stepTime: 0.5, to: 4);
@@ -53,7 +54,7 @@ class Player extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Coll
     final spriteAnimation = SpriteAnimationComponent(
       animation: _standingAnimation,
       position: position,
-      size: Vector2(64, 64),
+      size: spriteSize,
     );
 
     add(spriteAnimation);
@@ -88,7 +89,7 @@ class Player extends SpriteAnimationComponent with HasGameRef, HasHitboxes, Coll
     if (other is ScreenCollidable) {
       position = lastPos;
     }
-    if (other is Enemy) {
+    if (other is EnemySprite) {
       position = lastPos;
       gameRef.pauseEngine();
       gameRef.overlays.add(CombatOverlay.id);

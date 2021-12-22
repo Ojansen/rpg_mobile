@@ -86,6 +86,7 @@ flutter:
     - assets/images/sprites/
     - assets/images/spaceships/
     - assets/images/world/
+    - assets/images/world/planets/
     - assets/images/world/maps/
 
   # An image asset can refer to one or more resolution-specific "variants", see

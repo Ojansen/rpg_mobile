@@ -19,3 +19,7 @@ const kHudTextStyle = TextStyle(
   fontSize: 16,
   fontFamily: 'MajorMono',
 );
+
+const kSubtitleText = TextStyle(
+  fontSize: 14,
+);

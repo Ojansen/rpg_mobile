@@ -11,7 +11,7 @@ class EnemyModel {
   final int equippedArmour;
   final int equippedWeapon;
 
-  const EnemyModel({
+  EnemyModel({
     required this.id,
     required this.type,
     required this.name,
@@ -25,8 +25,8 @@ class EnemyModel {
     required this.equippedWeapon,
   });
 
-  static const Map<EnemyNames, EnemyModel> wetEnemies = {
-    EnemyNames.human: EnemyModel(
+  List<EnemyModel> wetEnemies = [
+    EnemyModel(
         id: 0,
         type: 'human',
         name: 'Human',
@@ -39,7 +39,7 @@ class EnemyModel {
         equippedArmour: 0,
         equippedWeapon: 0),
 
-    EnemyNames.exoHuman: EnemyModel(
+     EnemyModel(
         id: 0,
         type: 'exo human',
         name: 'Exo human',
@@ -51,7 +51,7 @@ class EnemyModel {
         money: 200,
         equippedArmour: 0,
         equippedWeapon: 0),
-  };
+  ];
 }
 
 enum EnemyNames {

@@ -66,7 +66,7 @@ class PauseOverlay extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(PauseOverlay.id);
-                gameRef.reset();
+                // gameRef.reset();
 
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(

@@ -21,24 +21,25 @@ class PlayerModelAdapter extends TypeAdapter<PlayerModel> {
       type: fields[1] as String,
       name: fields[2] as String,
       level: fields[3] as int,
-      health: fields[4] as int,
-      attack: fields[5] as int,
-      attackSpeed: fields[6] as int,
-      defence: fields[7] as int,
-      money: fields[8] as int,
-      equippedArmour: fields[9] as int,
-      equippedWeapon: fields[10] as int,
-      equippedTrinket: fields[11] as int,
-      ownedArmour: (fields[12] as List).cast<dynamic>(),
-      ownedWeapon: (fields[13] as List).cast<dynamic>(),
-      ownedTrinket: (fields[14] as List).cast<dynamic>(),
+      experience: fields[4] as int,
+      health: fields[5] as int,
+      attack: fields[6] as int,
+      attackSpeed: fields[7] as int,
+      defence: fields[8] as int,
+      money: fields[9] as int,
+      equippedArmour: fields[10] as int,
+      equippedWeapon: fields[12] as int,
+      equippedTrinket: fields[13] as int,
+      ownedArmour: (fields[14] as List).cast<dynamic>(),
+      ownedWeapon: (fields[15] as List).cast<dynamic>(),
+      ownedTrinket: (fields[16] as List).cast<dynamic>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, PlayerModel obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -48,26 +49,28 @@ class PlayerModelAdapter extends TypeAdapter<PlayerModel> {
       ..writeByte(3)
       ..write(obj.level)
       ..writeByte(4)
-      ..write(obj.health)
+      ..write(obj.experience)
       ..writeByte(5)
-      ..write(obj.attack)
+      ..write(obj.health)
       ..writeByte(6)
-      ..write(obj.attackSpeed)
+      ..write(obj.attack)
       ..writeByte(7)
-      ..write(obj.defence)
+      ..write(obj.attackSpeed)
       ..writeByte(8)
-      ..write(obj.money)
+      ..write(obj.defence)
       ..writeByte(9)
-      ..write(obj.equippedArmour)
+      ..write(obj.money)
       ..writeByte(10)
-      ..write(obj.equippedWeapon)
-      ..writeByte(11)
-      ..write(obj.equippedTrinket)
+      ..write(obj.equippedArmour)
       ..writeByte(12)
-      ..write(obj.ownedArmour)
+      ..write(obj.equippedWeapon)
       ..writeByte(13)
-      ..write(obj.ownedWeapon)
+      ..write(obj.equippedTrinket)
       ..writeByte(14)
+      ..write(obj.ownedArmour)
+      ..writeByte(15)
+      ..write(obj.ownedWeapon)
+      ..writeByte(16)
       ..write(obj.ownedTrinket);
   }
 

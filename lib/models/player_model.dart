@@ -19,36 +19,39 @@ class PlayerModel extends ChangeNotifier with HiveObjectMixin {
   int level;
 
   @HiveField(4)
-  int health;
+  int experience;
 
   @HiveField(5)
-  int attack;
+  int health;
 
   @HiveField(6)
-  int attackSpeed;
+  int attack;
 
   @HiveField(7)
-  int defence;
+  int attackSpeed;
 
   @HiveField(8)
-  int money;
+  int defence;
 
   @HiveField(9)
-  int equippedArmour;
+  int money;
 
   @HiveField(10)
-  int equippedWeapon;
-
-  @HiveField(11)
-  int equippedTrinket;
+  int equippedArmour;
 
   @HiveField(12)
-  List<dynamic> ownedArmour;
+  int equippedWeapon;
 
   @HiveField(13)
-  List<dynamic> ownedWeapon;
+  int equippedTrinket;
 
   @HiveField(14)
+  List<dynamic> ownedArmour;
+
+  @HiveField(15)
+  List<dynamic> ownedWeapon;
+
+  @HiveField(16)
   List<dynamic> ownedTrinket;
 
   PlayerModel({
@@ -56,6 +59,7 @@ class PlayerModel extends ChangeNotifier with HiveObjectMixin {
     required this.type,
     required this.name,
     required this.level,
+    required this.experience,
     required this.health,
     required this.attack,
     required this.attackSpeed,
@@ -74,6 +78,7 @@ class PlayerModel extends ChangeNotifier with HiveObjectMixin {
         type = map['type'],
         name = map['name'],
         level = map['level'],
+        experience = map['experience'],
         health = map['health'],
         attack = map['attack'],
         attackSpeed = map['attackSpeed'],
@@ -91,6 +96,7 @@ class PlayerModel extends ChangeNotifier with HiveObjectMixin {
     'type': 'human',
     'name': 'Finn',
     'level': 1,
+    'experience': 0,
     'health': 100,
     'attack': 1,
     'attackSpeed': 1,
